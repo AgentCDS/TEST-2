@@ -1,0 +1,157 @@
+---
+title: "Rarg"
+author: "CDS"
+date: "2023-11-12"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+#code here
+
+#USING VECTORS
+#1 There is a built-in vector LETTERS contains the uppercase letters of the alphabet and letters which contains the lowercase letters of the alphabet.
+
+LETTERS
+
+letters
+
+#a. You need to produce a vector that contains the first 11 letters.
+first_11_letters <- LETTERS[1:11]
+first_11_letters
+
+#b. Produce a vector that contains the odd numbered letters.
+oddletters <-LETTERS[seq(1,26,2)]
+oddletters
+
+#c. Produce a vector that contains the vowels.
+vowels <- LETTERS[c(1,5,9,15,21)]
+vowels
+
+#d. Produce a vector that contains the last 5 lowercase letters.
+last_5_lowercase_letters <- tail(letters, 5)
+last_5_lowercase_letters
+
+#e. Produce a vector that contains letters between 15 to 24 letters in lowercase.
+lowercase_letters <- letters[15:24]
+lowercase_letters
+
+#2. Create a vector(not a dataframe) with the average temperatures in April for Tuguegarao City, Manila, Iloilo City, Tacloban, Samal Island, and Davao City. The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees.
+
+  
+  #a. What is the R code and its result for creating a character vector for the city/town of Tuguegarao City, Manila, Iloilo City, Tacloban,Samal Island, and Davao City? Name the object as city. The names should follow the same order as in the instruction.
+
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+city
+  
+  #b. The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees. Name the object as temp. Write the R code and its output. Numbers should also follow what is in the instruction.
+  temp <- c(42, 39, 34, 34, 30, 27)
+  temp
+  
+  #c. Create a data frame to combine the city and the temp by using ‘data.frame(). What the R code and its result?
+  data <- data.frame(City= city, Temperature= temp)
+  data
+  
+  #d. Associate the data frame you have created in 2.(c) by naming the columns using the names() function. Change the column names by using names() function as City and Temperature. What is the R code and its result?
+  names(data) <-c("City", "Temperature")
+  names(data)
+  
+  #e. Print the structure by using str() function. Describe the output.
+  str(data)
+  
+  #f. From the answer in d, what is the content of row 3 and row 4 What is its R code and its output.
+  row_3_and_4 <- data[3:4, ]
+  row_3_and_4
+  
+  #g. From the answer in d, display the city with highest temperature and the city with the lowest temperature. What is its R code and its output?
+  highest_temp_city <- data[data$Temperature == max(data$Temperature), "City" ]
+  highest_temp_city
+  
+  lowest_temp_city <- data[data$Temperature == min(data$Temperature), "City"]
+  lowest_temp_city
+  
+#USING MATRICES
+  
+#2. Create a matrix of one to eight and eleven to fourteen with four columns and three rows.
+  #a. What will be the R code for the #2 question and its result?
+  matrix_1 <- matrix(c(1:8, 11:14),3,4)
+  matrix_1
+  
+  #b. Multiply the matrix by two. What is its R code and its result?
+  matrix_Mul <- matrix_1 * 2
+  matrix_Mul
+  
+  #c. What is the content of row 2? What is its R code?
+  row_2 <- matrix_1[2, ]
+  row_2
+  
+  #d. What will be the R code if you want to display the column 3 and column 4 in row 1 and row 2? What is its output?
+  Matrix_sub <- matrix_1[1:2, 3:4]
+  Matrix_sub
+  
+  #e. What is the R code is you want to display only the columns in 2 and 3, row 3? What is its output?
+  matrix_row_sub <- matrix_1[3, 2:3]
+  matrix_row_sub
+  
+  #f. What is the R code is you want to display only the columns 4? What is its output?
+  matrix_col4 <- matrix_1[ , 4]
+  matrix_col4
+  
+  #g. Name the rows as isa, dalawa, tatlo and columns as uno, dos, tres, quatro for the matrix that was created in b.‘. What is its R code and corresponding output?
+  rownames(matrix_1) <- c("isa", "dalawa", "tatlo")
+  colnames(matrix_1) <- c("uno", "dos", "tres", "quatro")
+  
+  matrix_1
+  
+  #h. From the original matrix you have created in a, reshape the matrix by assigning a new dimension with dim(). New dimensions should have 2 columns and 6 rows. What will be the R code and its output?
+  reshape_matrix <- matrix_1
+  dim(reshape_matrix) <- c(6, 2)
+  
+  reshape_matrix
+  
+#USING ARRAYS
+
+#3. An array contains 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1
+  #a. Create an array for the above numeric values. Each values will be repeated twice What will be the R code if you are to create a three-dimensional array with 4 columns and 2 rows. What will be its output?
+  num_values <-c( 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+  num_values
+  
+  array_1 <- array(num_values, dim = c(2,4,3))
+  array_1
+  
+  #b. How many dimensions do your array have?
+  dim(array_1)
+  
+  #c. Name the rows as lowercase letters and columns as uppercase letters starting from the A. The array names should be “1st-Dimensional Array”, “2nd-Dimensional Array”, and “3rd-Dimensional Array”. What will be the R codes and its output?
+  rownames(array_1) <- c("a","b")
+  array_1
+  
+  colnames(array_1) <- c("A","B","C","D")
+  array_1
+  
+  dimnames(array_1)[[3]] <- c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array")
+  array_1
+```
