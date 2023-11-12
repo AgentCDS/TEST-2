@@ -1,0 +1,121 @@
+---
+title: "Ragr 2"
+author: "CDS"
+date: "2023-11-12"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+#code here
+
+#1.  Create a data frame using the table below.
+
+#a. Write the codes.
+household_data <- data.frame(
+  Respondents =c(1:20),
+  Sex = c("Female","Female","Male","Female","Female","Female","Female","Female","Female","Female","Male","Female","Female","Female","Female","Female","Female","Female","Male","Female"),
+  
+  Fathers_Occupation = c("Farmer","Others","Others","Others","Farmer","Driver","Others","Farmer","Farmer","Farmer","Others","Driver","Farmer","Others","Others","Farmer","Others","Farmer","Driver","Farmer"),
+  
+  Persons_at_home = c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6),
+  
+  Siblings_at_school = c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2),
+  
+  Types_of_houses = c("Wood","Semi-Concrete","Concrete","Wood","Wood","Concrete","Concrete","Wood","Semi-Concrete","Concrete","Semi-Concrete","Concrete","Semi-Concrete","Semi-Concrete","Concrete","Concrete","Concrete","Concrete","Concrete","Semi-Concrete")
+)
+household_data
+
+#b. Describe the data. Get the structure or the summary of the data
+summary(household_data)
+
+#c. Is the mean number of siblings attending is 5?
+mean_siblings <- mean(household_data$Siblings_at_school)
+is_mean_5 <- mean_siblings == 5
+print(is_mean_5)
+
+#The answer is no because the mean number is 2.95.
+
+#d. Extract the 1st two rows and then all the columns using the subsetting functions. Write the codes and its output.
+first_two_rows_all_columns <- household_data[1:2, ]
+print(first_two_rows_all_columns)
+
+#It shows the data in 1st two rows and the columns in those rows.
+
+#e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
+selected_rows_columns <- household_data[c(3, 5), c(2, 4)]
+print(selected_rows_columns)
+
+#The output is the data in the 3rd and 5th row with the 2nd and 4th column.
+
+#f. Select the variable types of houses then store the vector that results as types_houses. Write the codes.
+types_houses <- household_data$Types_of_houses
+print(types_houses)
+
+#g. Select only all Males respondent that their father occupation was farmer. Write the codes and its output.
+males_farmers <- household_data[household_data$Sex == "Male" & household_data$Fathers_Occupation == "Farmer", ]
+print(males_farmers)
+
+#The output is empty because there is no male with a father whose occupation is farmer.
+
+#h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.
+females_greater_than_5_siblings <- household_data[household_data$Sex == "Female" & household_data$Siblings_at_school >= 5, ]
+print(females_greater_than_5_siblings)
+
+#The output is the data of all female respondents that have 5 or more siblings attending school.
+
+#2. Write a R program to create an empty data frame. Using the following codes:
+df = data.frame(Ints=integer(), 
+  Doubles=double(), Characters=character(),
+  Logicals=logical(),
+  Factors=factor(),
+  stringsAsFactors=FALSE) 
+print("Structure of the empty dataframe:") 
+print(str(df))
+
+#a. Describe the results.
+#The data frame is empty because no data has been added yet.
+
+#3. Create a .csv file of this. Save it as HouseholdData.csv
+write.csv(household_data, file = "HouseholdData.csv", row.names = FALSE)
+
+#a. Import the csv file into the R environment. Write the codes.
+imported_data <- read.csv("HouseholdData.csv")
+
+#b. Convert the Sex into factor using factor()function and change it into integer.[Legend: Male = 1 and Female = 2]. Write the R codes and its output.
+imported_data$Sex <- factor(imported_data$Sex, levels = c("Male", "Female"))
+imported_data$Sex <- as.integer(imported_data$Sex)
+
+#c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood = 1; Concrete = 2; Semi-Concrete = 3]. Write the R codes and its output.
+imported_data$Types_of_houses <- factor(imported_data$Types_of_houses, levels = c("Wood", "Concrete", "Semi-Concrete"))
+imported_data$Types_of_houses <- as.integer(imported_data$Types_of_houses)
+
+#d.On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What is the R code and its output?
+imported_data$Fathers_Occupation <- factor(imported_data$Fathers_Occupation, levels = c("Farmer", "Driver", "Others"))
+imported_data$Fathers_Occupation <- as.integer(imported_data$Fathers_Occupation)
+
+#e. Select only all females respondent that has a father whose occupation is driver. Write the codes and its output.
+female_drivers <- imported_data[imported_data$Sex == 2 & imported_data$Fathers_Occupation == 2, ]
+print(female_drivers)
+
+#The output is the data of all the female respondent that has a father whose occupation is a driver but this time all the data with characters have been replaced by integers.
+
+#f. Select the respondents that have greater than or equal to 5 number of siblings attending school. Write the codes and its output.
+greater_than_5_siblings <- imported_data[imported_data$Siblings_at_school >= 5, ]
+print(greater_than_5_siblings)
+
+#The output is the data of all the respondents that have greater than or equal to 5 number of siblings attending school with the results of the data being integers rather than characters
+
+#4. Interpret the graph.
+# The graph in figure 3 shows the sentiments of people when tweeting during July 14 until July 21, 2020. It shows that the sentiment of people during that time span fluctuates regularly. It shows that negative tweets are higher than the positive and neutral tweets during that time span. It can also be seen that during July 15 and July 21, 2020, the number of negative tweets has risen immensely which means that something bad or negative must have happened for people to react to something like that negatively.
+
+```
